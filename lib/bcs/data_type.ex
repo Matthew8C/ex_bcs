@@ -112,6 +112,18 @@ defmodule BCS.DataType do
     end
   end
 
+  defmodule Unit do
+    @moduledoc """
+    The Unit type, that is, essentially, an empty value.
+    """
+
+    defstruct []
+
+    @type t() :: %__MODULE__{}
+
+    def t(), do: struct(__MODULE__)
+  end
+
   defmodule Tuple do
     @moduledoc """
     Tuples
@@ -186,7 +198,7 @@ defmodule BCS.DataType do
             index: non_neg_integer()
           }
 
-    def t(selection, index) do
+    def t(selection \\ BCS.DataType.Unit.t(), index) do
       struct(__MODULE__, selection: selection, index: index)
     end
   end
@@ -215,6 +227,7 @@ defmodule BCS.DataType do
           | Bool.t()
           | List.t()
           | Maybe.t()
+          | Unit.t()
           | Tuple.t()
           | Struct.t()
           | Map.t()

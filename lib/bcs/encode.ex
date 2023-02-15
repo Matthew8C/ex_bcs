@@ -48,6 +48,8 @@ defmodule BCS.Encode do
     uleb128(length(xs)) <> encode(xs, T.Tuple.t(choices))
   end
 
+  def encode(_, %T.Unit{}), do: <<>>
+
   def encode(nil, _), do: <<0>>
 
   def encode(value, %T.Maybe{inner: type}) do
