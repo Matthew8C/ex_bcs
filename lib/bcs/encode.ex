@@ -50,10 +50,9 @@ defmodule BCS.Encode do
 
   def encode(_, %T.Unit{}), do: <<>>
 
-  def encode(nil, _), do: <<0>>
-
   def encode(value, %T.Maybe{inner: type}) do
-    encode([value], T.List.t(type))
+    List.wrap(value)
+    |> encode(T.List.t(type))
   end
 
   def encode(xs, %T.Tuple{arrangement: types}) when is_list(xs) do
